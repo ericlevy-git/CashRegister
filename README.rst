@@ -1,6 +1,16 @@
 Cash Register
 ==============
 
+Setup:
+----------
+
+1. Fork this repo on GitHub
+2. Create the iOS program described below. 
+3. Commit early and often, with good messages.
+4. Push your code back to GitHub and send me a pull request.
+
+(Don't be offended when I don't actually pull. I will clone your repo and inspect it locally when I receive the request. This repo will be left solution-less for obvious reasons.)
+
 Description:
 ------------
 
