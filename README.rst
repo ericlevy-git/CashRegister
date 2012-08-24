@@ -45,15 +45,15 @@ The aim of the program is to calculate the change that has to be returned to the
 Input sample:
 --------------
 
-Your program should accept as its first argument a path to a filename.The input file contains several lines. Each line is one test case. Each line contains two numbers which are separated by a semicolon. The first is the Purchase price (PP) and the second is the cash(CH) given by the customer. eg.
+Your program should accept two input values. The first is the Purchase price (PP) and the second is the cash(CH) given by the customer. eg.
 
- 15.94;16.00
+ 15.94 16.00
 
- 17;16
+ 17 16
 
- 35;35
+ 35 35
 
- 45;50
+ 45 50
 
 Output sample:
 ---------------
