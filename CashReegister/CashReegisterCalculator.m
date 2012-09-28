@@ -272,7 +272,7 @@
                 
             }
         }
-        if (fCashBack > 0.00)
+        if ([[NSString stringWithFormat:@"%.2f", fCashBack] floatValue] > 0.00)
         {
             [mtblarrCashBackForPurchasePrice removeAllObjects];
             [mtblarrCashBackForPurchasePrice addObject:[NSArray arrayWithObjects:@"ERROR", @"Not enough cash in the register", nil]];
