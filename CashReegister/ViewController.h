@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #include "CashReegisterCalculator.h"
 
-@interface ViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface ViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 @property (retain, nonatomic) CashReegisterCalculator *cashregister;
 @property (retain, nonatomic) NSArray *arrCashback;

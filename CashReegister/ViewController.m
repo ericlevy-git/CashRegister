@@ -117,4 +117,37 @@
     [self.tableviewChange reloadData];
 }
 
+- (IBAction)editingChangedOnCurrencyTextField:(UITextField *)sender
+{
+}
+
+-(BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSCharacterSet *nonNumberSet = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789."] invertedSet];
+    
+    if ([string isEqualToString:@"."])// do not allow more than one than one decimal
+    {
+        NSRange rangeOfExistingDecimal = [textField.text rangeOfString:@"."];
+        if (rangeOfExistingDecimal.location != NSNotFound )
+        {
+            return NO;
+        }
+    }
+    NSString *newValue = [[textField text] stringByReplacingCharactersInRange:range withString:string];
+    newValue = [[newValue componentsSeparatedByCharactersInSet:nonNumberSet] componentsJoinedByString:@""];
+    
+    if (![newValue isEqualToString:@"."])            // right now, for dollars, only allow to decimals.
+    {
+        NSRange rangeOfDecimal = [newValue rangeOfString:@"."];
+        if (rangeOfDecimal.location != NSNotFound && (rangeOfDecimal.location+1) < [newValue length]-2)
+        {
+            return NO;
+        }
+    }
+    
+    textField.text = newValue;
+
+    return NO;  // override, so don't return YES;
+}
+
 @end
