@@ -252,6 +252,7 @@
     else // OK, let's give them change from what we have
     {
         // we'll start from the heighest denimination in the draw, and work down to the lowest
+        NSMutableArray *mtblarrRemoveList = [[NSMutableArray alloc] init];
         NSArray *arrDenominations = [NSArray arrayWithArray:[self.dictDenominationValues keysSortedByValueUsingComparator:^(id Obj1, id Obj2)
                                                              {return [Obj2 compare:Obj1];}
                                                              ]];
@@ -264,10 +265,24 @@
                 [mtblarrCashBackForPurchasePrice addObject:[NSArray arrayWithObjects:strDenomination,
                                                                                     [NSNumber numberWithInt:quantity],
                                                                                     [NSNumber numberWithFloat:quantity * [self valueOfDemonination:strDenomination]], nil]];
-                [self removeQuantity:[NSNumber numberWithInt:quantity] ofDemonination:strDenomination];
+                [mtblarrRemoveList addObject:[NSArray arrayWithObjects:strDenomination, [NSNumber numberWithInt:quantity], nil]];
+                
                 
                 fCashBack -= (quantity * [self valueOfDemonination:strDenomination]);
                 
+            }
+        }
+        if (fCashBack > 0.00)
+        {
+            [mtblarrCashBackForPurchasePrice removeAllObjects];
+            [mtblarrCashBackForPurchasePrice addObject:[NSArray arrayWithObjects:@"ERROR", @"Not enough cash in the register", nil]];
+
+        }
+        else  //it's safe to take out the money
+        {
+            for (int i = 0; i < [mtblarrRemoveList count]; i++)
+            {
+                [self removeQuantity:[[mtblarrRemoveList objectAtIndex:i] objectAtIndex:1] ofDemonination:[[mtblarrRemoveList objectAtIndex:i] objectAtIndex:0]];
             }
         }
     }
