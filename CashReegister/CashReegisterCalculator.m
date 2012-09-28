@@ -60,10 +60,10 @@
                                    [NSNumber numberWithFloat:2.00], DENOMINATION_TWO,
                                    [NSNumber numberWithFloat:1.00], DENOMINATION_SINGLE,
                                    [NSNumber numberWithFloat:0.50], DENOMINATION_HALFDOLLAR,
-                                   [NSNumber numberWithFloat:0.25], DENOMINATION_QUARTER,
+                                   [NSNumber numberWithFloat:0.250], DENOMINATION_QUARTER,
                                    [NSNumber numberWithFloat:0.10], DENOMINATION_DIME,
-                                   [NSNumber numberWithFloat:0.05], DENOMINATION_NICKEL,
-                                   [NSNumber numberWithFloat:0.01], DENOMINATION_PENNY,
+                                   [NSNumber numberWithFloat:0.050], DENOMINATION_NICKEL,
+                                   [NSNumber numberWithFloat:0.010], DENOMINATION_PENNY,
                                                     nil];
     }
     return _dictDenominationValues;
@@ -217,7 +217,14 @@
     int nQuantityOfDemonination = 0;
     
     int iQuantityInRoll = [[self.mtbldictCashRoll valueForKey:strDenomination] intValue];
-    while ((nQuantityOfDemonination + 1) * [self valueOfDemonination:strDenomination] <= fAmount && nQuantityOfDemonination < iQuantityInRoll)
+    
+    float fValueOfDemonination = [[NSNumber numberWithFloat:[self valueOfDemonination:strDenomination]] floatValue];
+    
+    NSString *strValueOfDemonination = [NSString stringWithFormat:@"%.2f", fValueOfDemonination];
+    NSString *strAmount = [NSString stringWithFormat:@"%.2f", fAmount];
+    // I know this is ugly, but it gets rid of the imprecision of the floats, but casting to a %.2f string and then back to float.
+
+    while ((nQuantityOfDemonination + 1) *  [strValueOfDemonination floatValue] <= [strAmount floatValue] && nQuantityOfDemonination < iQuantityInRoll)
     {
         nQuantityOfDemonination++;
     }
