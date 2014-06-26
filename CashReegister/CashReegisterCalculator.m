@@ -237,7 +237,7 @@
     [self.mtbldictCashRoll removeAllObjects];
 }
 
--(NSArray *) cashBackForPurchasePrice:(float) fPurchasePrice andCashGiven:(float) fCashGiven
+-(NSArray *)cashBackForPurchasePrice:(float)fPurchasePrice andCashGiven:(float)fCashGiven
 {
     NSMutableArray *mtblarrCashBackForPurchasePrice = [[NSMutableArray alloc] init];
     float fCashBack = fCashGiven - fPurchasePrice;
